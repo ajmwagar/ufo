@@ -83,7 +83,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 ```
 
-See the `examples/` directly for more information.
+See the `examples/` directory for more information.
 
 ## Help out
 
