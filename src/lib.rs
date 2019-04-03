@@ -53,7 +53,7 @@ pub mod errors {
 }
 
 /// Connection of a drone
-pub struct DroneConnection {
+pub struct DroneUdpConnection {
     /// Ip to listen on
     bind_ip: String,
     /// Port to listen on
@@ -68,7 +68,7 @@ pub struct DroneConnection {
     sock: UdpSocket
 }
 
-impl DroneConnection {
+impl DroneUdpConnection {
 
     /// Create a new drone connection takes in `bind_ip`, `bind_port`, `connect_ip`, and `connect_port` all as `Strings`
     pub fn new(bind_ip: String, bind_port: String, connect_ip: String, connect_port: String) -> Self {
@@ -78,7 +78,7 @@ impl DroneConnection {
         bind_url.push_str(":");
         bind_url.push_str(&bind_port);
 
-        DroneConnection {
+        DroneUdpConnection {
             bind_ip,
             bind_port,
             connect_ip,

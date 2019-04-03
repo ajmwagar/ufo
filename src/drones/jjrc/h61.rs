@@ -21,13 +21,13 @@ pub enum UdpHex {
     /// Hex code for calibration
     Calibrate,
     /// Hex code for takeoff
-    Takeoff,
+    Start,
     /// Hex code for landing
     Land,
     /// Hex code for hovering
     Hover,
     /// Hex code for stopping
-    Landing,
+    Stop,
     /// Hex code for moving up
     Up,
     /// Hex code for moving down
@@ -55,10 +55,10 @@ impl UdpHex {
         // Define hex codes
         match self {
             UdpHex::Calibrate => "ff087e3f403fd0121200cb".to_string(),
-            UdpHex::Takeoff => "ff087e3f403f90121240c7".to_string(),
+            UdpHex::Start => "ff087e3f403f90121240c7".to_string(),
             UdpHex::Land => "ff087e3f403f9012128087".to_string(),
             UdpHex::Hover => "ff08fc3f403f9012120089".to_string(),
-            UdpHex::Landing => "ff087e3f403f901212a069".to_string(),
+            UdpHex::Stop => "ff087e3f403f901212a069".to_string(),
             // TODO Check if these need to be static
             UdpHex::Up => "ff08fc3f403f9012120089".to_string(),
             UdpHex::Down => "ff08003f403f9012120085".to_string(),
@@ -79,8 +79,8 @@ impl UdpHex {
 /// UFO controls of the JJRC H61 foldable drone
 pub struct Driver {
 
-    /// Drone controller, handles connections etc.
-    connection: crate::DroneConnection,
+    /// UDP Drone controller, handles connections etc.
+    connection: crate::DroneUdpConnection,
     // /// Status of drone
     // status: crate::DroneStatus,
     // /// Tuple with (X,Y,Z) coordinates of drone, optional but helpful for ReturnToSender and altitude lock
@@ -89,11 +89,11 @@ pub struct Driver {
 
 // Implement constructor
 impl Driver {
-    /// Create a new driver
+    /// Create a new driver and binds to default IP
     pub fn new() -> Self {
         // create new connection
         Driver {
-            connection: crate::DroneConnection::new(BIND_IP.to_string(), BIND_PORT.to_string(), CONN_IP.to_string(), CONN_UDP_PORT.to_string())
+            connection: crate::DroneUdpConnection::new(BIND_IP.to_string(), BIND_PORT.to_string(), CONN_IP.to_string(), CONN_UDP_PORT.to_string())
         }
     }
 
@@ -110,15 +110,66 @@ impl drone::Calibrate for Driver {
     }
 }
 
+// Implement hover command
+impl drone::Hover for Driver {
+    fn hover(&mut self) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::Hover.value())
+    }
+}
+
 
 // Implement FlightControl for H61 Driver
 impl control::FlightControl for Driver {
     fn take_off(&mut self) -> Result<(), Box<dyn Error>> {
-        self.connection.send_command(UdpHex::Takeoff.value())
+        self.connection.send_command(UdpHex::Start.value())
     }
 
     fn land(&mut self) -> Result<(), Box<dyn Error>> {
-        self.connection.send_command(UdpHex::Landing.value())
+        self.connection.send_command(UdpHex::Land.value());
+        self.connection.send_command(UdpHex::Stop.value())
     }
 }
 
+impl control::Movement for Driver {
+    fn left(time: usize) -> Result<(), Box<dyn Error>> {
+
+        Ok(())
+    }
+
+    fn right(time: usize) -> Result<(), Box<dyn Error>> {
+
+        Ok(())
+    }
+
+    fn up(time: usize) -> Result<(), Box<dyn Error>> {
+        
+
+        Ok(())
+    }
+    fn down(time: usize) -> Result<(), Box<dyn Error>> {
+
+        Ok(())
+    }
+
+    // Z Axis
+
+    fn forwards(time: usize) -> Result<(), Box<dyn Error>> {
+
+        Ok(())
+    }
+    fn backwards(time: usize) -> Result<(), Box<dyn Error>> {
+
+        Ok(())
+    }
+
+    // TODO Determine length of time parameter (milliseconds or seconds)
+
+    fn rot_left(time: usize) -> Result<(), Box<dyn Error>> {
+
+        Ok(())
+    }
+    fn rot_right(time: usize) -> Result<(), Box<dyn Error>> {
+
+        Ok(())
+    }
+}

@@ -3,9 +3,19 @@ pub mod drone {
     use std::error::Error;
     
     // TODO Calibration trait
+    /// Trait for drone calibration
     pub trait Calibrate {
+        /// Calibrate the drone
         fn calibrate(&mut self) -> Result<(), Box<dyn Error>>;
     }
+
+    /// Trait for drones that can hover
+    pub trait Hover {
+        /// Enable hover mode
+        fn hover(&mut self) -> Result<(), Box<dyn Error>>;
+    }
+
+
     // TODO Emergency trait
     // TODO VideoStream trait
     // TODO PhotoStream trait
