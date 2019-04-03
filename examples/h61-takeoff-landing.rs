@@ -4,18 +4,18 @@ use std::time::Duration;
 use std::thread;
 
 // Import traits
-use ufo::traits::control::*;
-use ufo::traits::drone::*;
+use ufo_rs::traits::control::*;
+use ufo_rs::traits::drone::*;
 
 // Import controller
-use ufo::drones::jjrc::h61;
+use ufo_rs::drones::jjrc::h61;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let cal_delay = Duration::from_millis(10000);
+    // let cal_delay = Duration::from_millis(10000);
     let delay = Duration::from_millis(1000);
 
     // Create a new drone driver
-    // TODO Fix bind error
+    // TODO Fix bind error when not connected to drone
     let mut driver = h61::Driver::new();
 
     // Connect to drone
@@ -26,17 +26,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         Err(e) => panic!("Connection Error, check connection to drone"),
     };
 
-    // // Calibrate drone 
-
-    // println!("Calibrating...");
-
-    // driver.calibrate()?;
-
-    // println!("Sent!");
-
-    // // Wait 2 seconds
-    // thread::sleep(cal_delay);
-    
     // Take off
     println!("Taking off...");
 
@@ -44,18 +33,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Sent!");
 
-    // Wait again
+    // Wait for a second
     thread::sleep(delay);
-
-    // // Take off
-    // println!("Hovering...");
-
-    // driver.hover()?;
-
-    // println!("Sent!");
-
-    // Wait again
-    // thread::sleep(delay);
 
     // Land
     println!("Landing...");

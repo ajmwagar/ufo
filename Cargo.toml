@@ -1,10 +1,11 @@
 [package]
 name = "ufo_rs"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
-description = "A `Drone/UAV/Quad copter programming library for Rust`"
+readme = "README.md"
+description = "A Drone/UAV/Quad copter programming library for Rust"
 authors = ["Avery Wagar <ajmw.subs@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-hex = "*"
+hex = "0.3.1"

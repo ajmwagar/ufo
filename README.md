@@ -21,7 +21,7 @@ Add this to your `Cargo.toml`
 
 ```
 [dependencies]
-ufo = "*"
+ufo_rs = "*"
 ```
 
 And put something like this in `src/main.rs`
@@ -33,11 +33,11 @@ use std::time::Duration;
 use std::thread;
 
 // Import traits
-use ufo::traits::control::*;
-use ufo::traits::drone::*;
+use ufo_rs::traits::control::*;
+use ufo_rs::traits::drone::*;
 
 // Import controller
-use ufo::drones::jjrc::h61;
+use ufo_rs::drones::jjrc::h61;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let delay = Duration::from_millis(2000);
