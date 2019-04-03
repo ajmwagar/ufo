@@ -64,32 +64,32 @@ pub mod control {
 
         // X Axis
         /// Move the drone left for n milliseconds (takes in a usize)
-        fn left(time: usize) -> Result<(), Box<dyn Error>>;
+        fn left(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
 
         /// Move the drone right for n milliseconds (takes in a usize)
-        fn right(time: usize) -> Result<(), Box<dyn Error>>;
+        fn right(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
 
         // Y Axis
 
         /// Move the drone up for n milliseconds (takes in a usize)
-        fn up(time: usize) -> Result<(), Box<dyn Error>>;
+        fn up(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
         /// Move the drone down for n milliseconds (takes in a usize)
-        fn down(time: usize) -> Result<(), Box<dyn Error>>;
+        fn down(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
 
         // Z Axis
 
         /// Move the drone forwards for n milliseconds (takes in a usize)
-        fn forwards(time: usize) -> Result<(), Box<dyn Error>>;
+        fn forwards(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
         /// Move the drone backwards for n milliseconds (takes in a usize)
-        fn backwards(time: usize) -> Result<(), Box<dyn Error>>;
+        fn backwards(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
 
         // TODO Determine length of time parameter (milliseconds or seconds)
 
         /// Move the drone left for n milliseconds (takes in a usize)
-        fn rot_left(time: usize) -> Result<(), Box<dyn Error>>;
+        fn rot_left(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
 
         /// Move the drone right for n milliseconds (takes in a usize)
-        fn rot_right(time: usize) -> Result<(), Box<dyn Error>>;
+        fn rot_right(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
     }
 
 

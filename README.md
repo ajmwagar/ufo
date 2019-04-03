@@ -66,8 +66,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Sent!");
 
-    // Wait again
-    thread::sleep(delay);
+    // Wait again for 1 second
+    thread::sleep(Duration::from_millis(1000));
 
     // Land
     println!("Landing...");

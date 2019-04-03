@@ -130,46 +130,42 @@ impl control::FlightControl for Driver {
     }
 }
 
+// Add movement controls
 impl control::Movement for Driver {
-    fn left(time: usize) -> Result<(), Box<dyn Error>> {
-
-        Ok(())
+    fn left(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::Left.value())
     }
 
-    fn right(time: usize) -> Result<(), Box<dyn Error>> {
-
-        Ok(())
+    fn right(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::Right.value())
     }
 
-    fn up(time: usize) -> Result<(), Box<dyn Error>> {
-        
+    fn up(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::Up.value())
 
-        Ok(())
     }
-    fn down(time: usize) -> Result<(), Box<dyn Error>> {
-
-        Ok(())
+    fn down(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::Down.value())
     }
 
     // Z Axis
 
-    fn forwards(time: usize) -> Result<(), Box<dyn Error>> {
+    fn forwards(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::Forwards.value())
 
-        Ok(())
     }
-    fn backwards(time: usize) -> Result<(), Box<dyn Error>> {
+    fn backwards(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::Backwards.value())
 
-        Ok(())
     }
 
     // TODO Determine length of time parameter (milliseconds or seconds)
 
-    fn rot_left(time: usize) -> Result<(), Box<dyn Error>> {
+    fn rot_left(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::RotLeft.value())
 
-        Ok(())
     }
-    fn rot_right(time: usize) -> Result<(), Box<dyn Error>> {
-
-        Ok(())
+    fn rot_right(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
+        self.connection.send_command(UdpHex::RotRight.value())
     }
 }
