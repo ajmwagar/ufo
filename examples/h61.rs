@@ -1,40 +1,53 @@
+/// Import std stuff
 use std::error::Error;
 use std::time::Duration;
 use std::thread;
 
+// Import traits
 use ufo::traits::control::*;
 use ufo::traits::drone::*;
+
+// Import controller
 use ufo::drones::jjrc::h61;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let delay = Duration::from_millis(2000);
 
-    let mut Driver = h61::Driver::new();
+    // Create a new drone driver
+    let mut driver = h61::Driver::new();
 
-    Driver.connect()?;
+    // Connect to drone
+    driver.connect()?;
+
+    // Calibrate drone 
 
     println!("Calibrating...");
-    Driver.calibrate()?;
+
+    driver.calibrate()?;
 
     println!("Sent!");
 
+    // Wait 2 seconds
     thread::sleep(delay);
     
+    // Take off
     println!("Taking off...");
 
-    Driver.take_off()?;
+    driver.take_off()?;
 
     println!("Sent!");
 
+    // Wait again
     thread::sleep(delay);
 
+    // Land
     println!("Landing...");
 
-    Driver.land()?;
-    
+    driver.land()?;
     
     println!("Sent!");
 
-
+    // Ta-dah!
     Ok(())
 }
+
