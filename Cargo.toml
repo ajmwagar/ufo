@@ -1,5 +1,5 @@
 [package]
-name = "ufo"
+name = "ufo_rs"
 version = "0.1.0"
 license = "MIT"
 description = "A `Drone/UAV/Quad copter programming library for Rust`"
