@@ -3,17 +3,20 @@
 use crate::traits::*;
 use std::error::Error;
 
-/// Bind IP
-const BIND_IP: &str = "172.16.10.59";
+/// IP to listen for data from drone
+pub const BIND_IP: &str = "172.16.10.59";
 
-/// Port to receive data on
-const BIND_PORT: &str = "8080";
+/// Port to receive data from drone on
+pub const BIND_PORT: &str = "8080";
 
 /// IP of drone
-const CONN_IP: &str = "172.16.10.1";
+pub const CONN_IP: &str = "172.16.10.1";
 
-/// UDP port to connect to drone on;
-const CONN_UDP_PORT: &str = "8080";
+/// UDP port to connect to drone on (handles controls)
+pub const CONN_UDP_PORT: &str = "8080";
+
+/// TCP port to connect to drone on (handles camera)
+pub const CONN_TCP_PORT: &str = "8888";
 
 // Hex Codes for UDP socket
 /// Hex codes for different commands
@@ -125,7 +128,9 @@ impl control::FlightControl for Driver {
     }
 
     fn land(&mut self) -> Result<(), Box<dyn Error>> {
+        // Perform a landing
         self.connection.send_command(UdpHex::Land.value());
+        // Stop propellers
         self.connection.send_command(UdpHex::Stop.value())
     }
 }
