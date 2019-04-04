@@ -13,6 +13,7 @@ __FYI: this is still a WIP, the traits and structs exist, but examples and docum
 ## Non-Goals
 
 - Implement A UI for controlling UAVs __(NOTE: I may decide to build a UI later on, but it will be in its own repository)__
+  - For controlling the drones using a keyboard checkout [mothership](https://github.com/ajmwagar/mothership)
 - Support other types of robotics/RCs, right now this crate is for RC Drones and Planes. This may change at a later date, but not right now.
 
 ## Installation and usage
