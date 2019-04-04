@@ -16,6 +16,13 @@ __FYI: this is still a WIP, the traits and structs exist, but examples and docum
   - For controlling the drones using a keyboard checkout [mothership](https://github.com/ajmwagar/mothership)
 - Support other types of robotics/RCs, right now this crate is for RC Drones and Planes. This may change at a later date, but not right now.
 
+## Supported drones
+
+Right now `UFO` supports the following drones:
+- `JJRC H61`
+
+Feel free to implement controls for your own drone and submit it in a pull request.
+
 ## Installation and usage
 
 Add this to your `Cargo.toml`
