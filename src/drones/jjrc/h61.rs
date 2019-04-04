@@ -18,6 +18,25 @@ pub const CONN_UDP_PORT: &str = "8080";
 /// TCP port to connect to drone on (handles camera)
 pub const CONN_TCP_PORT: &str = "8888";
 
+pub enum TcpHex {
+    Photo,
+    Video
+}
+
+impl TcpHex {
+    /// Returns hex string of command
+    pub fn value(&self) -> String {
+        // Define hex codes
+        match self {
+            TcpHex::Photo => "000102030405060708092525".to_string(),
+            TcpHex::Video => "000102030405060708092828".to_string()
+        }
+
+    }
+}
+
+
+
 // Hex Codes for UDP socket
 /// Hex codes for different commands
 pub enum UdpHex {
@@ -84,6 +103,7 @@ pub struct Driver {
 
     /// UDP Drone controller, handles connections etc.
     connection: crate::DroneUdpConnection,
+    camera: crate::DroneTcpConnection,
     // /// Status of drone
     // status: crate::DroneStatus,
     // /// Tuple with (X,Y,Z) coordinates of drone, optional but helpful for ReturnToSender and altitude lock
@@ -96,9 +116,23 @@ impl Driver {
     pub fn new() -> Self {
         // create new connection
         Driver {
-            connection: crate::DroneUdpConnection::new(BIND_IP.to_string(), BIND_PORT.to_string(), CONN_IP.to_string(), CONN_UDP_PORT.to_string())
+            connection: crate::DroneUdpConnection::new(BIND_IP.to_string(), BIND_PORT.to_string(), CONN_IP.to_string(), CONN_UDP_PORT.to_string()),
+            camera: crate::DroneTcpConnection::new(BIND_IP.to_string(), BIND_PORT.to_string(), CONN_IP.to_string(), CONN_TCP_PORT.to_string()),
         }
     }
+
+    pub fn request_photo(&mut self) -> Result<(), Box<dyn Error>> {
+        self.camera.send_command(TcpHex::Photo.value())
+    }
+
+    pub fn request_video(&mut self) -> Result<(), Box<dyn Error>> {
+        self.camera.send_command(TcpHex::Video.value())
+    }
+
+    pub fn read(&mut self) -> Result<Vec<u8>, Box<dyn Error>> {
+        self.camera.read()
+    }
+
 
     /// Connect to drone
     pub fn connect(&mut self) -> Result<(), Box<dyn Error>> {
@@ -133,6 +167,14 @@ impl control::FlightControl for Driver {
         // Stop propellers
         self.connection.send_command(UdpHex::Stop.value())
     }
+}
+
+impl drone::Stop for Driver {
+    fn stop(&mut self) -> Result<(), Box<dyn Error>> {
+        // Stop propellers
+        self.connection.send_command(UdpHex::Stop.value())
+    }
+    
 }
 
 // Add movement controls

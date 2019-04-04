@@ -37,6 +37,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Wait for a second
     thread::sleep(delay);
 
+    for _ in 0..5 {
+        driver.rot_left(10)?;
+        driver.stop()?;
+    }
+
     // Land
     println!("Landing...");
 

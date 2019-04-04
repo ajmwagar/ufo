@@ -9,6 +9,11 @@ pub mod drone {
         fn calibrate(&mut self) -> Result<(), Box<dyn Error>>;
     }
 
+    pub trait Stop {
+        fn stop(&mut self) -> Result<(), Box<dyn Error>>;
+
+    }
+
     /// Trait for drones that can hover
     pub trait Hover {
         /// Enable hover mode

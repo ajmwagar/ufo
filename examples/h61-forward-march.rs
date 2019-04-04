@@ -1,3 +1,4 @@
+
 /// Import std stuff
 use std::error::Error;
 use std::time::Duration;
@@ -36,6 +37,13 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // Wait for a second
     thread::sleep(delay);
+
+    driver.down(10)?;
+    for _ in 0..10 {
+        driver.forwards(10)?;
+    }
+
+    thread::sleep(Duration::from_millis(20000));
 
     // Land
     println!("Landing...");

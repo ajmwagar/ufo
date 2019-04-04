@@ -1,3 +1,4 @@
+
 /// Import std stuff
 use std::error::Error;
 use std::time::Duration;
@@ -13,7 +14,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     use ufo_rs::drones::jjrc::h61;
 
     // let cal_delay = Duration::from_millis(10000);
-    let delay = Duration::from_millis(1000);
+    let delay = Duration::from_millis(5000);
 
     // Create a new drone driver
     // TODO Fix bind error when not connected to drone
@@ -34,8 +35,13 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Sent!");
 
+
+    driver.hover()?;
+
     // Wait for a second
     thread::sleep(delay);
+
+
 
     // Land
     println!("Landing...");
