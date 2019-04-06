@@ -20,7 +20,7 @@ pub const CONN_TCP_PORT: &str = "8888";
 
 pub enum TcpHex {
     Photo,
-    Video
+    Video,
 }
 
 impl TcpHex {
@@ -29,13 +29,10 @@ impl TcpHex {
         // Define hex codes
         match self {
             TcpHex::Photo => "000102030405060708092525".to_string(),
-            TcpHex::Video => "000102030405060708092828".to_string()
+            TcpHex::Video => "000102030405060708092828".to_string(),
         }
-
     }
 }
-
-
 
 // Hex Codes for UDP socket
 /// Hex codes for different commands
@@ -66,9 +63,6 @@ pub enum UdpHex {
     RotLeft,
     /// Hex code for rotating right
     RotRight,
-
-
-
 }
 
 impl UdpHex {
@@ -91,16 +85,13 @@ impl UdpHex {
             UdpHex::RotLeft => "ff087e00403f9012120046".to_string(),
             UdpHex::RotRight => "ff087e7e403f90121200c8".to_string(),
         }
-
     }
 }
-
 
 // Code for drone programmer-facing API
 
 /// UFO controls of the JJRC H61 foldable drone
 pub struct Driver {
-
     /// UDP Drone controller, handles connections etc.
     connection: crate::DroneUdpConnection,
     camera: crate::DroneTcpConnection,
@@ -116,8 +107,18 @@ impl Driver {
     pub fn new() -> Self {
         // create new connection
         Driver {
-            connection: crate::DroneUdpConnection::new(BIND_IP.to_string(), BIND_PORT.to_string(), CONN_IP.to_string(), CONN_UDP_PORT.to_string()),
-            camera: crate::DroneTcpConnection::new(BIND_IP.to_string(), BIND_PORT.to_string(), CONN_IP.to_string(), CONN_TCP_PORT.to_string()),
+            connection: crate::DroneUdpConnection::new(
+                BIND_IP.to_string(),
+                BIND_PORT.to_string(),
+                CONN_IP.to_string(),
+                CONN_UDP_PORT.to_string(),
+            ),
+            camera: crate::DroneTcpConnection::new(
+                BIND_IP.to_string(),
+                BIND_PORT.to_string(),
+                CONN_IP.to_string(),
+                CONN_TCP_PORT.to_string(),
+            ),
         }
     }
 
@@ -132,7 +133,6 @@ impl Driver {
     pub fn read(&mut self) -> Result<Vec<u8>, Box<dyn Error>> {
         self.camera.read()
     }
-
 
     /// Connect to drone
     pub fn connect(&mut self) -> Result<(), Box<dyn Error>> {
@@ -154,7 +154,6 @@ impl drone::Hover for Driver {
     }
 }
 
-
 // Implement FlightControl for H61 Driver
 impl control::FlightControl for Driver {
     fn take_off(&mut self) -> Result<(), Box<dyn Error>> {
@@ -174,7 +173,6 @@ impl drone::Stop for Driver {
         // Stop propellers
         self.connection.send_command(UdpHex::Stop.value())
     }
-    
 }
 
 // Add movement controls
@@ -189,7 +187,6 @@ impl control::Movement for Driver {
 
     fn up(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
         self.connection.send_command(UdpHex::Up.value())
-
     }
     fn down(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
         self.connection.send_command(UdpHex::Down.value())
@@ -199,18 +196,15 @@ impl control::Movement for Driver {
 
     fn forwards(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
         self.connection.send_command(UdpHex::Forwards.value())
-
     }
     fn backwards(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
         self.connection.send_command(UdpHex::Backwards.value())
-
     }
 
     // TODO Determine length of time parameter (milliseconds or seconds)
 
     fn rot_left(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
         self.connection.send_command(UdpHex::RotLeft.value())
-
     }
     fn rot_right(&mut self, time: usize) -> Result<(), Box<dyn Error>> {
         self.connection.send_command(UdpHex::RotRight.value())
