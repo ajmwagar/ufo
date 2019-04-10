@@ -1,12 +1,11 @@
 /// Import std stuff
 use std::error::Error;
-use std::time::Duration;
 use std::thread;
+use std::time::Duration;
 
 // Import traits
 use ufo_rs::traits::control::*;
 use ufo_rs::traits::drone::*;
-
 
 fn main() -> Result<(), Box<dyn Error>> {
     // Import controller
@@ -46,7 +45,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Landing...");
 
     driver.land()?;
-    
+
     println!("Sent!");
 
     // Ta-dah!

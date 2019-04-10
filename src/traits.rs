@@ -1,7 +1,7 @@
 /// Mod for traits regarding onboard functions. (i.e. Camera stream, LEDs, barometer, battery status, etc)
 pub mod drone {
     use std::error::Error;
-    
+
     // TODO Calibration trait
     /// Trait for drone calibration
     pub trait Calibrate {
@@ -11,7 +11,6 @@ pub mod drone {
 
     pub trait Stop {
         fn stop(&mut self) -> Result<(), Box<dyn Error>>;
-
     }
 
     /// Trait for drones that can hover
@@ -19,7 +18,6 @@ pub mod drone {
         /// Enable hover mode
         fn hover(&mut self) -> Result<(), Box<dyn Error>>;
     }
-
 
     // TODO Emergency trait
     // TODO VideoStream trait
@@ -64,7 +62,6 @@ pub mod control {
 
     /// Movement pub trait (i.e. controls for Up, Down, Forward, Backwards, Left and Right);
     pub trait Movement {
-
         // TODO Determine length of time parameter (milliseconds or seconds)
 
         // X Axis
@@ -96,7 +93,6 @@ pub mod control {
         /// Move the drone right for n milliseconds (takes in a usize)
         fn rot_right(&mut self, time: usize) -> Result<(), Box<dyn Error>>;
     }
-
 
     /// pub trait for Takeoff and Landing
     pub trait FlightControl {
