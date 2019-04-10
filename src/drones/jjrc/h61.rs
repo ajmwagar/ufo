@@ -4,7 +4,8 @@ use crate::traits::*;
 use std::error::Error;
 
 /// IP to listen for data from drone
-pub const BIND_IP: &str = "172.16.10.59";
+// pub const BIND_IP: &str = "172.16.10.174";
+pub const BIND_IP: &str = "0.0.0.0";
 
 /// Port to receive data from drone on
 pub const BIND_PORT: &str = "8080";
