@@ -1,6 +1,6 @@
 # 🚀 👾  U.F.O: Universal Flying Objects
 
-![ufo](https://docs.rs/ufo_rs/badge.svg) [![dependency status](https://deps.rs/repo/github/ajmwagar/ufo/status.svg)](https://deps.rs/repo/github/ajmwagar/ufo) [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ufo_rs/community)
+[![ufo](https://docs.rs/ufo_rs/badge.svg)](https://docs.rs/ufo_rs) [![dependency status](https://deps.rs/repo/github/ajmwagar/ufo/status.svg)](https://deps.rs/repo/github/ajmwagar/ufo) [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ufo_rs/community)
 
 A `Drone/UAV/Quadcopter/RC Plane` programming library for `Rust`.
 
