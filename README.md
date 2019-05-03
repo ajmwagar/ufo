@@ -1,5 +1,7 @@
 # 🚀 👾  U.F.O: Universal Flying Objects
 
+![ufo](https://docs.rs/ufo_rs/badge.svg) [![dependency status](https://deps.rs/repo/github/ajmwagar/ufo/status.svg)](https://deps.rs/repo/github/ajmwagar/ufo)
+
 A `Drone/UAV/Quadcopter/RC Plane` programming library for `Rust`.
 
 __FYI: this is still a WIP, the traits and structs exist, but examples and documentation are lacking... Proceed with caution.__
