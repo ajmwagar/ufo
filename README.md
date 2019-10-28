@@ -6,6 +6,8 @@ A `Drone/UAV/Quadcopter/RC Plane` programming library for `Rust`.
 
 __FYI: this is still a WIP, the traits and structs exist, but examples and documentation are lacking... Proceed with caution.__
 
+__NOTE: I broke my only quadcopter. When I get a new one, I will continue to work on this library. Until then I will accept pull requests and issues, but no active development will happen.__
+
 ## Goals
 
 1. Build an extensible modular library that can support an infinite number of UAVs.
